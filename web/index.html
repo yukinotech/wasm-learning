@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head> </head>
+  <body>
+    <div>wasm</div>
+    <script>
+      let importObject = {
+        console: {
+          log: function (arg) {
+            console.log(arg)
+          },
+        },
+      }
+
+      fetchAndInstantiate('index.wasm').then(function (instance) {
+        console.log(instance.exports.add(1, 2)) // "3"
+      })
+      fetchAndInstantiate('call.wasm').then(function (instance) {
+        console.log(instance.exports.getAnswerPlus1())
+      })
+      fetchAndInstantiate('js.wasm', importObject).then(function (instance) {
+        instance.exports.logIt()
+      })
+
+      // fetchAndInstantiate() found in wasm-utils.js
+      function fetchAndInstantiate(url, importObject) {
+        return fetch(url)
+          .then((response) => response.arrayBuffer())
+          .then((bytes) => WebAssembly.instantiate(bytes, importObject))
+          .then((results) => results.instance)
+      }
+    </script>
+  </body>
+</html>
