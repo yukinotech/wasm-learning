@@ -5,5 +5,6 @@
   (global $string_len i32 (i32.const 12))
   (data (global.get $start_string) "hello world!")
   (func (export "helloworld")
-  (call $print_string (global.get $string_len)) )
+    (call $print_string (global.get $string_len)) 
+  )
 )
