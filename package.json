@@ -1,5 +1,7 @@
 {
   "dependencies": {
+    "@webassemblyjs/cli": "^1.11.1",
+    "@webassemblyjs/wast-parser": "^1.11.1",
     "fastify": "^3.25.2",
     "fastify-static": "^4.5.0"
   }
